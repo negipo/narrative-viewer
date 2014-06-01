@@ -19,12 +19,12 @@
 
         $(window).keydown(function(e){
           if (e.keyCode === 74) {
-            show(index ++);
+            show(++ index);
             if (index > pathes.length) {
               alert('done');
             }
           } else if (e.keyCode == 75) {
-            show(index --);
+            show(-- index);
           } else if (e.keyCode == 82) {
             rotate();
           }
@@ -34,6 +34,7 @@
         function show(index) {
           var image = imageByPath(pathes[index]);
           $('#image').attr({src: image});
+          $('title').text(index);
         }
 
         function rotate() {
