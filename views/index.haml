@@ -1,0 +1,50 @@
+!!!
+%html
+  %head
+    %meta{ content: "text/html; charset=utf-8", "http-equiv" => "content-type" }
+    %title
+      test
+    %script{ src: "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js", type: "text/javascript" }
+    %script{ src: "//dl.dropbox.com/u/275354/lib/coffee-script.js", type: "text/javascript" }
+    %link{ href: "//dl.dropbox.com/u/275354/lib/cssreset-min.css", rel: "stylesheet", type: "text/css" }
+    %link{ href: "/style.css", rel: "stylesheet", type: "text/css" }
+    %style{ media: "screen", type: "text/css" }
+    :javascript
+      jQuery(function($) {
+        var pathes = $('body').data('pathes');
+        var index = $('body').data('index');
+        var degree = 0;
+
+        show(index);
+
+        $(window).keydown(function(e){
+          if (e.keyCode === 74) {
+            show(index ++);
+            if (index > pathes.length) {
+              alert('done');
+            }
+          } else if (e.keyCode == 75) {
+            show(index --);
+          } else if (e.keyCode == 82) {
+            rotate();
+          }
+
+        });
+
+        function show(index) {
+          var image = imageByPath(pathes[index]);
+          $('#image').attr({src: image});
+        }
+
+        function rotate() {
+          degree += 90;
+          $('body').css({transform: 'rotate(' + degree + 'deg)'})
+        }
+      });
+
+      function imageByPath(path) {
+        return path;
+      };
+  %body{ data: { pathes: $files, index: $index } }
+    %img#image{ src: '' }
+
